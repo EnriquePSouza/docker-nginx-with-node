@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Create a docker compose with nginx, node and mysql, to make a reverse proxy with nginx to access a node server to insert a register in a database mysql and display a message in the browser page.
+Create a docker compose with nginx, node and mysql, to make a reverse proxy with nginx to access a node server to insert a register in a database mysql and display a message followed by the database list of registers in the browser page.
 
 ## Build 
 
@@ -10,7 +10,7 @@ Create a docker compose with nginx, node and mysql, to make a reverse proxy with
 docker-compose up -d --build
 ```
 
-## docker-compose.yaml
+## Docker Compose
 
 
 ```
@@ -24,6 +24,7 @@ services:
       dockerfile: Dockerfile.prod
     image: enriqueps/nginx:prod
     container_name: nginx
+    entrypoint: wait-for app:3000 -t 20 -- nginx -g 'daemon off;'
     networks:
       - network
     ports:
@@ -66,7 +67,7 @@ networks:
     driver: bridge
 ```
 
-## Nginx reverse proxy config
+## Nginx Reverse Proxy Config 
 
 ```
 server{
@@ -82,7 +83,7 @@ server{
 }
 ```
 
-## Node index
+## Node Index Page
 
 ```
 const express = require('express')
@@ -134,4 +135,3 @@ app.listen(port, ()=> {
     console.log('Rodando na porta ' + port)
 })
 ```
-
