@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     const sqlSelect = "SELECT * FROM people";
     connection.query(sqlSelect, (err, rows) => {
         if (err) {
-            res.send('<h1>Erro ao buscar registros no banco de dados</h1>');
+            res.send('<h1>Error fetching records from database.</h1>');
             return;
         }
 
@@ -34,12 +34,12 @@ app.get('/', (req, res) => {
 
         res.send(`
             <h1>Full Cycle Rocks!</h1>
-            <h2>Nomes cadastrados no banco de dados:</h2>
+            <h2>List of registered names in database:</h2>
             ${namesList}
         `);
     });
 });
 
 app.listen(port, ()=> {
-    console.log('Rodando na porta ' + port)
+    console.log('Running at ' + port)
 })

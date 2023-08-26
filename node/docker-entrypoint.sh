@@ -1,9 +1,7 @@
-#!/bin/bash
-
-# Configurações ou comandos de inicialização antes de iniciar o Node.js
-echo "Configurando o ambiente..."
+# Settings or startup commands before starting the Node.js
+echo "Setting up the environment..."
+npm install
 
 # Iniciando o serviço Node.js
-echo "Iniciando o servidor Node.js..."
-npm install
+echo "Starting node server..."
 node index.js

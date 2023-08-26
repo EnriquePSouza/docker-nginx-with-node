@@ -12,7 +12,6 @@ docker-compose up -d --build
 
 ## Docker Compose
 
-
 ```
 version: '3'
 
@@ -97,9 +96,6 @@ const config = {
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
 
-const sqlDb = "CREATE DATABASE IF NOT EXISTS nodedb"
-connection.query(sqlDb)
-
 const sqlUse = "use nodedb"
 connection.query(sqlUse)
 
@@ -113,7 +109,7 @@ app.get('/', (req, res) => {
     const sqlSelect = "SELECT * FROM people";
     connection.query(sqlSelect, (err, rows) => {
         if (err) {
-            res.send('<h1>Erro ao buscar registros no banco de dados</h1>');
+            res.send('<h1>Error fetching records from database.</h1>');
             return;
         }
 
@@ -125,13 +121,42 @@ app.get('/', (req, res) => {
 
         res.send(`
             <h1>Full Cycle Rocks!</h1>
-            <h2>Nomes cadastrados no banco de dados:</h2>
+            <h2>List of registered names in database:</h2>
             ${namesList}
         `);
     });
 });
 
 app.listen(port, ()=> {
-    console.log('Rodando na porta ' + port)
+    console.log('Running at ' + port)
 })
+```
+
+## Node Dockerfile to utilize wait-for-it
+
+```
+FROM node:18
+
+# WAIT-FOR-IT - START.
+
+RUN apt update && \
+    apt install -y wget netcat-traditional && \
+    wget -q -O /usr/bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for && \
+    chmod +x /usr/bin/wait-for
+
+# WAIT-FOR-IT - END.
+
+WORKDIR /usr/src/app
+```
+
+## Node docker-entrypoint.sh to install modules and start server
+
+```
+# Settings or startup commands before starting the Node.js
+echo "Setting up the environment..."
+npm install
+
+# Iniciando o serviço Node.js
+echo "Starting node server..."
+node index.js
 ```
