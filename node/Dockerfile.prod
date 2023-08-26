@@ -1,6 +1,4 @@
-FROM node:latest
-
-WORKDIR /usr/src/app
+FROM node:18
 
 # WAIT-FOR-IT - START.
 
@@ -11,4 +9,4 @@ RUN apt update && \
 
 # WAIT-FOR-IT - END.
 
-EXPOSE 3000
+WORKDIR /usr/src/app

@@ -9,9 +9,6 @@ const config = {
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
 
-const sqlDb = "CREATE DATABASE IF NOT EXISTS nodedb"
-connection.query(sqlDb)
-
 const sqlUse = "use nodedb"
 connection.query(sqlUse)
 

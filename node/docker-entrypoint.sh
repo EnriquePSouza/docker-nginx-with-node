@@ -5,4 +5,5 @@ echo "Configurando o ambiente..."
 
 # Iniciando o serviço Node.js
 echo "Iniciando o servidor Node.js..."
+npm install
 node index.js
